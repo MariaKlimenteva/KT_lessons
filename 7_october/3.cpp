@@ -20,8 +20,6 @@ int main()
        pthread_join(thread[i], NULL); 
        printf("id: %lu\n", thread[i]);
     }
-    
-
 
     return 0;
 }
