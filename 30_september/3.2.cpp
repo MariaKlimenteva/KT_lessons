@@ -6,17 +6,22 @@
 #include <sys/stat.h>
 #include <stdio.h>
 
+const int MAX_STR = 100;
+
 int main()
 {
     umask(0);
-    int key = ftok("3.cpp", 0);
-    int ret = shmget(key, sizeof(char)*3, 0777);
-
-    if(ret != -1)
-    {
-        ret = shmget (key, sizeof(char)*3, 0777| IPC_CREAT);
-        char *array = (char*)shmat (ret, NULL, 0);
-    }
+    int key = ftok ("3.1.cpp", 0);
+    int ret = shmget(key, sizeof(char)*MAX_STR, 0777| IPC_CREAT | IPC_EXCL);
+    char* mem[MAX_STR];
+    mem = (char*)shmat (ret, NULL, 0);
     
+    for(int i = 0; i < MAX_STR; i++)
+    {
+        printf("%s", *mem + i);
+    }
+    shmctl(ret, IPC_RMID, NULL);
     return 0;
 }
+    
+   
