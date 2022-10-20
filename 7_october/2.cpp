@@ -1,5 +1,5 @@
 //pthread_create
-//pthread_join - главная нить вызывает вторую, главная дет окончания выполнения второй
+//pthread_join - главная нить вызывает вторую, главная ждет окончания выполнения второй
 //второй аргумент - NULL
 //pthread_exit - экстренное завершение нити
 
@@ -12,16 +12,18 @@
 void* func(void* arg)
 {
     (*((int *)arg))++;
+    return 0;
 }
 
 int main()
 {
-    int argument = 0;
+    int argument = 1;
     pthread_t thread;
     printf("First thread id: %lu\n",pthread_self());
     pthread_create(&thread, (const pthread_attr_t *)NULL, (void *(*) (void *))func, &argument);
     pthread_join(thread, NULL);
     printf("Second thread id: %lu\n", thread);
+    printf("The number of thread starts: %d\n", argument);
     return 0;
 }
 

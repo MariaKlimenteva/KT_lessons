@@ -19,7 +19,6 @@
         {
             ret = shmget (key, sizeof(char)*3, 0777);
             array = (int*)shmat (ret, NULL, 0);
-            
         }
         else
         {
@@ -28,8 +27,6 @@
             array[1] = 0;
             array[2] = 0;
         }
-        printf("%d\n", array);
-        
         array[0] += 1;
         
         //shmctl(ret, IPC_RMID, NULL);
