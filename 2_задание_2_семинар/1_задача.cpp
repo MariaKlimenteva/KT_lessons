@@ -1,17 +1,27 @@
-#include <stdio.h>
-#include <sys/types.h>
+//написать ls
+
 #include <dirent.h>
+#include <string.h>
+#include <stdio.h>
 
-int main(int argc, char** arcv)
+int main(int argc, char* argv[]) 
 {
-    DIR* dirp;
-    struct dirent *ds;
-    dirp = opendir(arcv[1]); //получаем указатель на поток указателя, указывая как аргумент командной строки имя нужной директории
-    while(readdir(dirp) != NULL) //пока не достигли последней записи
-    {
-        printf("%s\n", ds->d_name);
-    }
-    closedir(dirp);
 
+    char path[1000] = {};
+    if (argc < 2)
+        strcpy(path, "./");
+    else 
+        strcpy(path, argv[1]);
+
+    DIR* dirp = opendir(path);
+
+    struct dirent* ds = readdir(dirp);
+    while (ds) {
+        printf("%s\n", ds->d_name);
+        ds = readdir(dirp);
+    }
+
+    closedir(dirp);
+    
     return 0;
 }
