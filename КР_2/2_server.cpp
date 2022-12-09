@@ -23,6 +23,7 @@ int main()
     struct sockaddr_in serv_addr = {0};
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(9002);
+    serv_addr.sin_addr = 
 
     //--------------- Связывание сокета с некоторым адресом
     if(bind(socket_fd, (struct sockaddr*) &serv_addr, sizeof(serv_addr)) != 0) printf("Error in bind()\n"); 

@@ -4,6 +4,7 @@
 // -> выводит все вложенные директории(не рекурсивно)
 
 // buf.st.link в stat
+
 #include <dirent.h>
 #include <string.h>
 #include <stdio.h>
